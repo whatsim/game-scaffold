@@ -30,6 +30,7 @@
 		if(_needsDraw){
 			_renderer.width = _renderer.width
 			var context = _renderer.getContext('2d')
+			context.scale(Settings.dpi,Settings.dpi)
 
 			player.draw(time,context)
 			for(var i = 0; i < bullets.length; i++) bullets[i].draw(time,context)
@@ -41,8 +42,8 @@
 	}
 
 	function _viewResize(){
-		_renderer.width = window.innerWidth
-		_renderer.height = window.innerHeight
+		_renderer.width = window.innerWidth * Settings.dpi
+		_renderer.height = window.innerHeight * Settings.dpi
 	}
 
 	window.addEventListener('load',_init)
