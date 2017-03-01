@@ -15,7 +15,7 @@ function Projectile(x,y,speed,heading){
 		drawContext.save()
 		drawContext.translate(this.x,this.y)
 		drawContext.rotate(this.heading)
-		drawContext.strokeStyle = "black"
+		drawContext.strokeStyle = "#9EB9D4"
 		drawContext.beginPath()
 		drawContext.moveTo(0,0)
 		drawContext.lineTo(5,0)

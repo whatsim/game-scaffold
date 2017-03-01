@@ -3,9 +3,12 @@ function Player(id,x,y,color){
 	this.x = x
 	this.y = y
 	this.color = color
-	this.inventory = {}
-	this.speed = 3
+	this.inventory = {ammo:10000}
+	this.speed = 5
 	this.heading = 0
+	this.health = 100
+
+	var gunReady = 0
 
 	var bullets = []
 
@@ -19,7 +22,21 @@ function Player(id,x,y,color){
 		if(Inputs[Settings.controls.left]) this.x -= speed
 		if(Inputs[Settings.controls.right]) this.x += speed
 
-		if(Inputs[Settings.mouse.down]) bullets.push(new Projectile(this.x,this.y,10,this.heading))
+		if(Inputs[Settings.mouse.down]){
+			if(this.inventory.ammo > 0 && gunReady == 0){
+				bullets.push(new Projectile(this.x,this.y,10,this.heading))
+				this.inventory.ammo --
+				gunReady = 5
+			}
+		}
+		if(gunReady > 0){
+			if(!Inputs[Settings.mouse.down]){
+				gunReady = 0
+			} else {
+				gunReady --
+			}
+		}
+
 
 		for(var i = bullets.length-1; i >= 0; i--){
 			var age = bullets[i].update()

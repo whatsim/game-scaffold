@@ -1,6 +1,6 @@
 (function(){
 	var _needsDraw = true
-	var player = new Player(0,0,0,"red")
+	var player = new Player(window.innerWidth/2,window.innerHeight/2,0,"#6495ED")
 	var ui = new UI()
 	var _renderer, _context
 

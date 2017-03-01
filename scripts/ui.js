@@ -13,7 +13,7 @@ function UI(){
 		drawContext.save()
 		drawContext.translate(Inputs[Settings.mouse.x],Inputs[Settings.mouse.y])
 		drawContext.rotate(playerHeading)
-		drawContext.strokeStyle = this.color + " 1px solid"
+		drawContext.strokeStyle = "#fffacd"
 		drawContext.beginPath()
 		drawContext.moveTo(0,cursorLength)
 		drawContext.lineTo(0,0)
