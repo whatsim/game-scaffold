@@ -1,8 +1,10 @@
 (function(){
 	var _needsDraw = true
-	var player = new Player(window.innerWidth/2,window.innerHeight/2,0,"#6495ED")
+	var player = new Player(0,100,100,"#6495ED")
 	var ui = new UI()
 	var _renderer, _context
+
+	var bullets = []
 
 	function _init(){
 		 _renderer = document.getElementById('renderer')
@@ -13,7 +15,13 @@
 	}
 
 	function _update(){
-		player.update()
+		player.update(bullets)
+
+		for(var i = bullets.length-1; i >= 0; i--){
+			var age = bullets[i].update()
+			if(age > 100) bullets.splice(i,1)
+		}
+
 		ui.update(player)
 		_needsDraw = true
 	}
@@ -24,10 +32,11 @@
 			var context = _renderer.getContext('2d')
 
 			player.draw(time,context)
+			for(var i = 0; i < bullets.length; i++) bullets[i].draw(time,context)
+			
 			ui.draw(time,context)
-
+			_needsDraw = false
 		}
-		_needsDraw = false
 		window.requestAnimationFrame(_draw)
 	}
 

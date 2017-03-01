@@ -10,9 +10,7 @@ function Player(id,x,y,color){
 
 	var gunReady = 0
 
-	var bullets = []
-
-	this.update = function(){
+	this.update = function(bullets){
 		var speed = this.speed
 
 		this.heading = Math.PI - Math.atan2(this.x - Inputs[Settings.mouse.x],this.y - Inputs[Settings.mouse.y])
@@ -36,12 +34,6 @@ function Player(id,x,y,color){
 				gunReady --
 			}
 		}
-
-
-		for(var i = bullets.length-1; i >= 0; i--){
-			var age = bullets[i].update()
-			if(age > 100) bullets.splice(i,1)
-		}
 	}
 	this.draw = function(time,drawContext){
 		drawContext.save()
@@ -50,13 +42,11 @@ function Player(id,x,y,color){
 		drawContext.fillStyle = this.color
 		drawContext.beginPath()
 		drawContext.moveTo(0,5)
-		drawContext.lineTo(-5,-5)
-		drawContext.lineTo(5,-5)
+		drawContext.lineTo(-4,-5)
+		drawContext.lineTo(4,-5)
 		drawContext.lineTo(0,5)
 		drawContext.closePath()
 		drawContext.fill()
 		drawContext.restore()
-
-		for(var i = 0; i < bullets.length; i++) bullets[i].draw(time,drawContext)
 	}
 }

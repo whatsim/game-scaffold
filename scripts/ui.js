@@ -15,7 +15,7 @@ function UI(){
 		drawContext.rotate(playerHeading)
 		drawContext.strokeStyle = "#fffacd"
 		drawContext.beginPath()
-		drawContext.moveTo(0,cursorLength)
+		drawContext.moveTo(0,-cursorLength)
 		drawContext.lineTo(0,0)
 		drawContext.closePath()
 		drawContext.stroke()
