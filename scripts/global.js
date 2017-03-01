@@ -1,7 +1,7 @@
 (function(){
 	var _needsDraw = true
 	var player = new Player(0,100,100,"#6495ED")
-	var ui = new UI()
+	var ui = new UI(player)
 	var _renderer, _context
 
 	var bullets = []
@@ -22,7 +22,7 @@
 			if(age > 100) bullets.splice(i,1)
 		}
 
-		ui.update(player)
+		ui.update()
 		_needsDraw = true
 	}
 

@@ -6,7 +6,7 @@ function Player(id,x,y,color){
 	this.inventory = {ammo:10000}
 	this.speed = 5
 	this.heading = 0
-	this.health = 100
+	this.health = 75
 
 	var gunReady = 0
 
