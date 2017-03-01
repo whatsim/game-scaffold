@@ -3,7 +3,16 @@ function Player(id,x,y,color){
 	this.x = x
 	this.y = y
 	this.color = color
-	this.inventory = {ammo:10000}
+	this.inventory = {
+		ammo:10000,
+		items : {
+
+		}
+	}
+	this.velocity = {
+		x:0,
+		y:0
+	}
 	this.speed = 5
 	this.heading = 0
 	this.health = 75
@@ -15,10 +24,16 @@ function Player(id,x,y,color){
 
 		this.heading = Math.PI - Math.atan2(this.x - Inputs[Settings.mouse.x],this.y - Inputs[Settings.mouse.y])
 
-		if(Inputs[Settings.controls.up]) this.y -= speed
-		if(Inputs[Settings.controls.down]) this.y += speed
-		if(Inputs[Settings.controls.left]) this.x -= speed
-		if(Inputs[Settings.controls.right]) this.x += speed
+		if(Inputs[Settings.controls.up]) this.velocity.y = -speed
+		if(Inputs[Settings.controls.down]) this.velocity.y = speed
+		if(Inputs[Settings.controls.left]) this.velocity.x = -speed
+		if(Inputs[Settings.controls.right]) this.velocity.x = speed
+
+		this.x += this.velocity.x
+		this.y += this.velocity.y
+
+		this.velocity.x *= 0.85
+		this.velocity.y *= 0.85
 
 		if(Inputs[Settings.mouse.down]){
 			if(this.inventory.ammo > 0 && gunReady == 0){

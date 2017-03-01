@@ -1,6 +1,7 @@
 (function(){
 	var _needsDraw = true
 	var player = new Player(0,100,100,"#6495ED")
+	console.log(player)
 	var ui = new UI(player)
 	var _renderer, _context
 
