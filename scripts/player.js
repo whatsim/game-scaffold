@@ -42,7 +42,7 @@ function Player(options){
 				bullets.push(new Projectile({
 					x:this.x,
 					y:this.y,
-					speed:10,
+					speed:12,
 					heading:this.heading
 				}))
 				this.inventory.ammo --

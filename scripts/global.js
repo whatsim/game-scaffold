@@ -26,6 +26,14 @@
 		}))		
 
 		planets.push(new Planet(bullets,player,{
+			x:window.innerWidth/2,
+			y:window.innerHeight/2,
+			radius:10,
+			mass:-25,
+			color:'skyblue'
+		}))		
+
+		planets.push(new Planet(bullets,player,{
 			x:2*window.innerWidth/3,
 			y:window.innerHeight/2,
 			radius:60,
