@@ -17,16 +17,13 @@
 		_context = _renderer.getContext('2d')
 		_viewResize()
 
-		var numPlanets = Math.ceil(Math.random() * 2)
-		for(var i = 0; i < numPlanets; i++) {
-			planets.push(new Planet(bullets,player,{
-				x:Math.random()*window.innerWidth,
-				y:Math.random()*window.innerHeight,
-				radius:Math.random()*window.innerWidth/4,
-				mass:Math.random() * 100,
-				color:'#FFB6C1'
-			}))
-		}
+		planets.push(new Planet(bullets,player,{
+			x:Math.random()*window.innerWidth,
+			y:Math.random()*window.innerHeight,
+			radius:Math.random()*window.innerWidth/8,
+			mass:Math.random() * 10,
+			color:'#DB7093'
+		}))		
 
 		window.setInterval(_update,33) // logic 30 fps-ish
 		window.requestAnimationFrame(_draw) // probably 60 fps
@@ -37,7 +34,7 @@
 
 		for(var i = bullets.length-1; i >= 0; i--){
 			var age = bullets[i].update()
-			if(age > 1000) bullets.splice(i,1)
+			if(age > 500) bullets.splice(i,1)
 		}
 
 		for(var i = 0; i < planets.length; i++) planets[i].update()
