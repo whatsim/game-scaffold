@@ -10,7 +10,15 @@ function Planet(bullets,player,options){
 	
 	this.update = function(){
 		
-		for(var i = 0; i < bullets.length; i++) pull(bullets[i])
+		for(var i = 0; i < bullets.length; i++){
+			pull(bullets[i])
+			var testPos = {
+				x:bullets[i].x + bullets[i].velocity.x,
+				y:bullets[i].y + bullets[i].velocity.y
+			}
+			var distance = Utils.distance(this,testPos)
+			if(distance < this.radius) bullets[i].age = 10000000
+		}
 	}
 	this.draw = function(time,drawContext){
 		drawContext.save()
@@ -27,8 +35,8 @@ function Planet(bullets,player,options){
 		var distance = Utils.distance(this,object)
 		var force = this.mass/distance
 		var angle = Math.atan2(this.x - object.x,this.y - object.y)
-		object.velocity.x += Math.sin(angle)
-		object.velocity.y += Math.cos(angle)
+		object.velocity.x += force*Math.sin(angle)
+		object.velocity.y += force*Math.cos(angle)
 	}
 
 }

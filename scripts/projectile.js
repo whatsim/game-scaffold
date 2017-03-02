@@ -11,14 +11,14 @@ function Projectile(options){
 		y:Math.sin(this.heading) * this.speed
 	}
 
-	var age = 0
+	this.age = 0
 	this.update = function(){
 
 		this.x += this.velocity.x
 		this.y += this.velocity.y
 
 		this.heading = Math.atan2(this.velocity.y,this.velocity.x)
-		return age++
+		return this.age++
 	}
 	this.draw = function(time,drawContext){
 		drawContext.save()
@@ -26,8 +26,9 @@ function Projectile(options){
 		drawContext.rotate(this.heading)
 		drawContext.strokeStyle = "#9EB9D4"
 		drawContext.beginPath()
-		drawContext.moveTo(0,0)
-		drawContext.lineTo(10,0)
+		var mag = Utils.pythagoreanHypo(this.velocity.x,this.velocity.y)
+		drawContext.moveTo(-mag+1,0)
+		drawContext.lineTo(0,0)
 		drawContext.closePath()
 		drawContext.stroke()
 		drawContext.restore()

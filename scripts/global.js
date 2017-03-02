@@ -18,12 +18,21 @@
 		_viewResize()
 
 		planets.push(new Planet(bullets,player,{
-			x:Math.random()*window.innerWidth,
-			y:Math.random()*window.innerHeight,
-			radius:Math.random()*window.innerWidth/8,
-			mass:Math.random() * 10,
+			x:window.innerWidth/3,
+			y:window.innerHeight/2,
+			radius:60,
+			mass:100,
 			color:'#DB7093'
 		}))		
+
+		planets.push(new Planet(bullets,player,{
+			x:2*window.innerWidth/3,
+			y:window.innerHeight/2,
+			radius:60,
+			mass:100,
+			color:'#DB7093'
+		}))		
+
 
 		window.setInterval(_update,33) // logic 30 fps-ish
 		window.requestAnimationFrame(_draw) // probably 60 fps
@@ -31,13 +40,13 @@
 
 	function _update(){
 		player.update(bullets)
-
+		for(var i = 0; i < planets.length; i++) planets[i].update()
 		for(var i = bullets.length-1; i >= 0; i--){
 			var age = bullets[i].update()
 			if(age > 500) bullets.splice(i,1)
 		}
 
-		for(var i = 0; i < planets.length; i++) planets[i].update()
+		
 
 		ui.update()
 		_needsDraw = true

@@ -15,6 +15,7 @@ function UI(player){
 		drawContext.translate(Inputs[Settings.mouse.x],Inputs[Settings.mouse.y])
 		drawContext.rotate(player.heading)
 		drawContext.strokeStyle = "#fffacd"
+		drawContext.strokeWidth = 2
 		drawContext.beginPath()
 		drawContext.moveTo(0,-cursorLength)
 		drawContext.lineTo(0,0)
