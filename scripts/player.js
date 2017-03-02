@@ -1,8 +1,9 @@
-function Player(id,x,y,color){
-	this.id = id
-	this.x = x
-	this.y = y
-	this.color = color
+function Player(options){
+	// id,x,y,color
+	this.id = options.id
+	this.x = options.x
+	this.y = options.y
+	this.color = options.color
 	this.inventory = {
 		ammo:10000,
 		items : {
@@ -16,6 +17,7 @@ function Player(id,x,y,color){
 	this.speed = 5
 	this.heading = 0
 	this.health = 75
+	this.weaponCooldown = 5
 
 	var gunReady = 0
 
@@ -37,9 +39,14 @@ function Player(id,x,y,color){
 
 		if(Inputs[Settings.mouse.down]){
 			if(this.inventory.ammo > 0 && gunReady == 0){
-				bullets.push(new Projectile(this.x,this.y,10,this.heading))
+				bullets.push(new Projectile({
+					x:this.x,
+					y:this.y,
+					speed:10,
+					heading:this.heading
+				}))
 				this.inventory.ammo --
-				gunReady = 5
+				gunReady = this.weaponCooldown
 			}
 		}
 		if(gunReady > 0){
@@ -56,10 +63,10 @@ function Player(id,x,y,color){
 		drawContext.rotate(this.heading)
 		drawContext.fillStyle = this.color
 		drawContext.beginPath()
-		drawContext.moveTo(0,5)
-		drawContext.lineTo(-4,-5)
-		drawContext.lineTo(4,-5)
-		drawContext.lineTo(0,5)
+		drawContext.moveTo(0,7)
+		drawContext.lineTo(-6,-7)
+		drawContext.lineTo(6,-7)
+		drawContext.lineTo(0,7)
 		drawContext.closePath()
 		drawContext.fill()
 		drawContext.restore()

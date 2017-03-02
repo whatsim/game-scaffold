@@ -3,7 +3,7 @@ function UI(player){
 	var distanceToCursor = 0
 
 	this.update = function(){
-		distanceToCursor = Math.sqrt(Math.pow(Inputs[Settings.mouse.x] - player.x,2) + Math.pow(Inputs[Settings.mouse.y] - player.y,2))
+		distanceToCursor = Utils.distance({x:Inputs[Settings.mouse.x],y:Inputs[Settings.mouse.y]},player)
 	}
 	this.draw = function(time,drawContext){
 
