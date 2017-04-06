@@ -4,6 +4,10 @@ function Game(options){
 	var _needsDraw = true
 	var _renderer, _context
 
+	var enviroment = {
+		dpi : window.devicePixelRatio,
+	}
+
 	function _init(){
 		 _renderer = document.getElementById(options.rendererID)
 		_context = _renderer.getContext('2d')
@@ -23,7 +27,7 @@ function Game(options){
 	function _draw(time){
 		if(_needsDraw){
 			_renderer.width = _renderer.width
-			_context.scale(Settings.dpi,Settings.dpi)
+			_context.scale(enviroment.dpi,enviroment.dpi)
 
 			if(options.draw) options.draw(time,_context)
 			
@@ -33,8 +37,9 @@ function Game(options){
 	}
 
 	function _viewResize(){
-		_renderer.width = window.innerWidth * Settings.dpi
-		_renderer.height = window.innerHeight * Settings.dpi
+		enviroment.dpi = window.devicePixelRatio
+		_renderer.width = window.innerWidth * enviroment.dpi
+		_renderer.height = window.innerHeight * enviroment.dpi
 	}
 
 	window.addEventListener('load',_init)

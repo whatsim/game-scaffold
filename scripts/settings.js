@@ -1,5 +1,4 @@
 var Settings = {
-	dpi : window.devicePixelRatio,
 	controls : {
 		'up':'w',
 		'down':'s',

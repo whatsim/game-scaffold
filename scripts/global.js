@@ -14,6 +14,9 @@
 	var gameOptions = {
 		rendererID: 'renderer',
 		init : function(){
+
+			var connection = new Connect()
+
 			planets.push(new Planet(bullets,player,{
 				x:window.innerWidth/3,
 				y:window.innerHeight/2,
