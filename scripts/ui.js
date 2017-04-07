@@ -14,7 +14,7 @@ function UI(player){
 		drawContext.save()
 		drawContext.translate(Inputs[Settings.mouse.x],Inputs[Settings.mouse.y])
 		drawContext.rotate(player.heading)
-		drawContext.strokeStyle = "#fffacd"
+		drawContext.strokeStyle = "white"
 		drawContext.strokeWidth = 2
 		drawContext.beginPath()
 		drawContext.moveTo(0,-cursorLength)
@@ -23,20 +23,5 @@ function UI(player){
 		drawContext.stroke()
 		drawContext.restore()
 
-		// ammo
-		drawContext.save()
-		drawContext.translate(player.x,player.y)
-		drawContext.rotate(player.heading)
-		drawContext.translate(0,-75)
-		drawContext.rotate(-player.heading)
-		drawContext.fillStyle = "#9EB9D4"
-		drawContext.fillRect(-25,-2,50,4)
-		drawContext.fillStyle = "white"
-		drawContext.fillRect(-25,-2,player.health/2,4)
-		drawContext.textAlign = "center"
-		drawContext.font = "6pt Courier"
-		drawContext.fillText(player.inventory.ammo,0,-8)
-
-		drawContext.restore()
 	}
 }
