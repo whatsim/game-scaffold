@@ -4,14 +4,16 @@ function Connect(options){
 	var isHost = window.location.hash === '#host'
 	var dc = pc.createDataChannel('aaa');
 	
+	var out = ""
+
 	pc.onicecandidate = e => {
-		!e.candidate || console.log(JSON.stringify(e.candidate))
+		!e.candidate || console.log(out + "=!=!=!=" + JSON.stringify(e.candidate))
     }
 
     if(isHost){
 		pc.createOffer()
 	    .then(offer => {
-	    	console.log(JSON.stringify(offer))
+	    	out += JSON.stringify(offer)
 	    	pc.setLocalDescription(offer)
 	    })
 	    .then(giveAnswer)
@@ -20,7 +22,7 @@ function Connect(options){
 		giveAnswer().then(function(offer){pc.setRemoteDescription(offer)})
 		.then(() => pc.createAnswer())
 		.then(answer => {
-			console.log(JSON.stringify(answer))
+			out += JSON.stringify(answer)
 			pc.setLocalDescription(answer)
 		})
 	}
@@ -41,13 +43,15 @@ function Connect(options){
 	function giveAnswer(){
 		var p = new Promise(function(resolve,reject){
 			answer = function(str){				
-				resolve(JSON.parse(str.replace(/\r\n/g,"\\r\\n")))
+				var split = str.split("=!=!=!=")
+				resolve(JSON.parse(split[0].replace(/\r\n/g,"\\r\\n")))
+				setTimeout(function(){
+					pc.addIceCandidate(JSON.parse(split[1]))
+				})
 			}
 		})
 		
 		return p
 	}
-	giveCandidate = function(str){
-		pc.addIceCandidate(JSON.parse(str))
-	}
+	
 }
