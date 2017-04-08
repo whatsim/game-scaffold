@@ -8,20 +8,6 @@ var Inputs = (function(){
 	window.addEventListener('mousemove',readMouse)
 	window.addEventListener('mouseup',readMouse)
 
-	window.addEventListener("gamepadconnected", controllerConnection)
-	window.addEventListener("gamepaddisconnected", controllerConnection)
-
-	function controllerConnection(e){
-		inputState.controllersConnected = false
-		var gamepads = navigator.getGamepads()
-		var length = navigator.getGamepads().length
-		for(var i = 0; i < length; i++){
-			if(gamepads[i]) inputState.controllersConnected = true
-		}
-		inputState.controllers = gamepads
-	}
-	controllerConnection()
-
 	inputState.pollControllers = function(){
 		var gamepads = navigator.getGamepads()
 		inputState.controllers = gamepads
