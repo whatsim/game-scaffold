@@ -8,6 +8,22 @@ var Inputs = (function(){
 	window.addEventListener('mousemove',readMouse)
 	window.addEventListener('mouseup',readMouse)
 
+	window.addEventListener("gamepadconnected", controllerConnection)
+	window.addEventListener("gamepaddisconnected", controllerConnection)
+
+	function controllerConnection(e){
+		if(navigator.getGamepads().length) inputState.controllersConnected = true
+		else {
+			inputState.controllersConnected = false
+			inputState.controllers = undefined
+		}
+	}
+
+	function pollControllers(){
+		var gamepads = navigator.getGamepads()
+		inputState.controllers = gamepads
+	}
+
 	function readKeys(e){
 		e.preventDefault()
 		inputState[e.key] = e.type === 'keydown'

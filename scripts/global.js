@@ -17,11 +17,13 @@
 
 			var connection = new Connect()
 
+			console.log(connection)
+
 			planets.push(new Planet(bullets,player,{
 				x:window.innerWidth/3,
 				y:window.innerHeight/2,
 				radius:60,
-				mass:100,
+				mass:12000,
 				color:'#DB7093'
 			}))		
 
@@ -29,7 +31,7 @@
 				x:window.innerWidth/2,
 				y:window.innerHeight/2,
 				radius:10,
-				mass:-25,
+				mass:-1000,
 				color:'skyblue'
 			}))		
 
@@ -37,16 +39,22 @@
 				x:2*window.innerWidth/3,
 				y:window.innerHeight/2,
 				radius:60,
-				mass:100,
+				mass:12000,
 				color:'#DB7093'
 			}))		
 		}, 
 		update : function(){
+
+			if(Inputs.controllersConnected){
+				console.log(Inputs.controllersConnected)
+				Inputs.pollControllers()
+			}
+
 			player.update(bullets)
 			for(var i = 0; i < planets.length; i++) planets[i].update()
 			for(var i = bullets.length-1; i >= 0; i--){
 				var age = bullets[i].update()
-				if(age > 500) bullets.splice(i,1)
+				if(age > bullets[i].maxAge) bullets.splice(i,1)
 			}
 			ui.update()
 		},
