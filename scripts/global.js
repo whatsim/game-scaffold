@@ -46,7 +46,6 @@
 		update : function(){
 
 			if(Inputs.controllersConnected){
-				console.log(Inputs.controllersConnected)
 				Inputs.pollControllers()
 			}
 

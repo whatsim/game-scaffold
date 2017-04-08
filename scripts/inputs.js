@@ -11,6 +11,8 @@ var Inputs = (function(){
 	window.addEventListener("gamepadconnected", controllerConnection)
 	window.addEventListener("gamepaddisconnected", controllerConnection)
 
+	if (navigator.getGamepads().length > 0) inputState.controllersConnected = true
+
 	function controllerConnection(e){
 		if(navigator.getGamepads().length) inputState.controllersConnected = true
 		else {
