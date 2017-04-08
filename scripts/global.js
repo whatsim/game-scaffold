@@ -6,10 +6,14 @@
 		color:"#6495ED"
 	})
 	
+	console.log(player)
+
 	var ui = new UI(player)
 	
 	var bullets = []
 	var planets = []
+
+	var mode = "running"
 
 	var gameOptions = {
 		rendererID: 'renderer',
@@ -44,16 +48,19 @@
 			}))		
 		}, 
 		update : function(){
+			if(mode === 'running'){
+				Inputs.pollControllers()
 
-			Inputs.pollControllers()
+				player.update(bullets)
+				for(var i = 0; i < planets.length; i++) planets[i].update()
+				for(var i = bullets.length-1; i >= 0; i--){
+					var age = bullets[i].update()
+					if(age > bullets[i].maxAge) bullets.splice(i,1)
+				}
+				ui.update()
+			} else {
 
-			player.update(bullets)
-			for(var i = 0; i < planets.length; i++) planets[i].update()
-			for(var i = bullets.length-1; i >= 0; i--){
-				var age = bullets[i].update()
-				if(age > bullets[i].maxAge) bullets.splice(i,1)
 			}
-			ui.update()
 		},
 		draw : function(time,context){
 			for(var i = 0; i < planets.length; i++) planets[i].draw(time,context)
