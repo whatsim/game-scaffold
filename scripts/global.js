@@ -31,7 +31,7 @@
 				x:window.innerWidth/2,
 				y:window.innerHeight/2,
 				radius:10,
-				mass:-1500,
+				mass:-1000,
 				color:'skyblue'
 			}))		
 
@@ -44,6 +44,12 @@
 			}))		
 		}, 
 		update : function(){
+
+			if(Inputs.controllersConnected){
+				console.log(Inputs.controllersConnected)
+				Inputs.pollControllers()
+			}
+
 			player.update(bullets)
 			for(var i = 0; i < planets.length; i++) planets[i].update()
 			for(var i = bullets.length-1; i >= 0; i--){
