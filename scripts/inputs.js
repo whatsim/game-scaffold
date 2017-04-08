@@ -11,15 +11,16 @@ var Inputs = (function(){
 	window.addEventListener("gamepadconnected", controllerConnection)
 	window.addEventListener("gamepaddisconnected", controllerConnection)
 
-	if (navigator.getGamepads().length > 0) inputState.controllersConnected = true
-
 	function controllerConnection(e){
-		if(navigator.getGamepads().length) inputState.controllersConnected = true
-		else {
-			inputState.controllersConnected = false
-			inputState.controllers = undefined
+		inputState.controllersConnected = false
+		var gamepads = navigator.getGamepads()
+		var length = navigator.getGamepads().length
+		for(var i = 0; i < length; i++){
+			if(gamepads[i]) inputState.controllersConnected = true
 		}
+		inputState.controllers = gamepads
 	}
+	controllerConnection()
 
 	inputState.pollControllers = function(){
 		var gamepads = navigator.getGamepads()
