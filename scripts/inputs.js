@@ -19,7 +19,7 @@ var Inputs = (function(){
 		}
 	}
 
-	function pollControllers(){
+	inputState.pollControllers(){
 		var gamepads = navigator.getGamepads()
 		inputState.controllers = gamepads
 	}
