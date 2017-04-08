@@ -39,11 +39,17 @@ function Player(options){
 
 		if(Inputs[Settings.mouse.down]){
 			if(this.inventory.ammo > 0 && gunReady == 0){
+				var distanceToCursor = Utils.distance({x:Inputs[Settings.mouse.x],y:Inputs[Settings.mouse.y]},this)
+				var ratio = distanceToCursor / (window.innerWidth / 4)
+				ratio = ratio > 1 ? 1 : ratio
+				var speed = Utils.lerp(ratio * ratio,5,20)
+
 				bullets.push(new Projectile({
 					x:this.x,
 					y:this.y,
-					speed:12,
-					heading:this.heading
+					speed:speed,
+					heading:this.heading,
+					maxAge:500
 				}))
 				this.inventory.ammo --
 				gunReady = this.weaponCooldown

@@ -17,6 +17,8 @@
 
 			var connection = new Connect()
 
+			console.log(connection)
+
 			planets.push(new Planet(bullets,player,{
 				x:window.innerWidth/3,
 				y:window.innerHeight/2,
@@ -46,7 +48,7 @@
 			for(var i = 0; i < planets.length; i++) planets[i].update()
 			for(var i = bullets.length-1; i >= 0; i--){
 				var age = bullets[i].update()
-				if(age > 500) bullets.splice(i,1)
+				if(age > bullets[i].maxAge) bullets.splice(i,1)
 			}
 			ui.update()
 		},

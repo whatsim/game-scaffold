@@ -5,6 +5,7 @@ function Projectile(options){
 	this.y = options.y
 	this.speed = options.speed
 	this.heading = options.heading + Math.PI/2
+	this.maxAge = options.maxAge
 
 	this.velocity = {
 		x:Math.cos(this.heading) * this.speed,
@@ -12,6 +13,7 @@ function Projectile(options){
 	}
 
 	this.age = 0
+
 	this.update = function(){
 
 		this.x += this.velocity.x
@@ -21,10 +23,11 @@ function Projectile(options){
 		return this.age++
 	}
 	this.draw = function(time,drawContext){
+		var a = (1 - (this.age / this.maxAge))
 		drawContext.save()
 		drawContext.translate(this.x,this.y)
 		drawContext.rotate(this.heading)
-		drawContext.strokeStyle = "#9EB9D4"
+		drawContext.strokeStyle = "rgba(158,185,212,"+a+")"
 		drawContext.beginPath()
 		var mag = Utils.pythagoreanHypo(this.velocity.x,this.velocity.y)
 		drawContext.moveTo(-mag+1,0)
