@@ -33,7 +33,7 @@ function Planet(bullets,player,options){
 
 	var pull = (object) => {
 		var distance = Utils.distance(this,object)
-		var force = this.mass/distance
+		var force = this.mass/(distance*distance)
 		var angle = Math.atan2(this.x - object.x,this.y - object.y)
 		object.velocity.x += force*Math.sin(angle)
 		object.velocity.y += force*Math.cos(angle)

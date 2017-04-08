@@ -23,7 +23,7 @@
 				x:window.innerWidth/3,
 				y:window.innerHeight/2,
 				radius:60,
-				mass:100,
+				mass:12000,
 				color:'#DB7093'
 			}))		
 
@@ -31,7 +31,7 @@
 				x:window.innerWidth/2,
 				y:window.innerHeight/2,
 				radius:10,
-				mass:-25,
+				mass:-1500,
 				color:'skyblue'
 			}))		
 
@@ -39,7 +39,7 @@
 				x:2*window.innerWidth/3,
 				y:window.innerHeight/2,
 				radius:60,
-				mass:100,
+				mass:12000,
 				color:'#DB7093'
 			}))		
 		}, 
