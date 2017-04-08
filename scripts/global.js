@@ -45,9 +45,7 @@
 		}, 
 		update : function(){
 
-			if(Inputs.controllersConnected){
-				Inputs.pollControllers()
-			}
+			Inputs.pollControllers()
 
 			player.update(bullets)
 			for(var i = 0; i < planets.length; i++) planets[i].update()
