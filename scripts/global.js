@@ -13,6 +13,22 @@
 	var bullets = []
 	var planets = []
 
+	var audioOut = new Sound()
+
+	var highBeep = {
+		frequency : 440,
+		wave : 'triangle',
+		gain:0.2,
+		duration:1/440 * 10
+	}
+	
+	var lowBeep = {
+		frequency : 120,
+		wave : 'square',
+		gain:0.1,
+		duration:1/120 * 10
+	}
+
 	var mode = "running"
 
 	var gameOptions = {
@@ -48,6 +64,7 @@
 			}))		
 		}, 
 		update : function(){
+
 			if(mode === 'running'){
 				Inputs.pollControllers()
 
@@ -55,7 +72,13 @@
 				for(var i = 0; i < planets.length; i++) planets[i].update()
 				for(var i = bullets.length-1; i >= 0; i--){
 					var age = bullets[i].update()
-					if(age > bullets[i].maxAge) bullets.splice(i,1)
+					if(age < 1) audioOut.beep(highBeep)
+					if(age > 500){
+						if(age > 10000){
+							audioOut.beep(lowBeep)
+						}
+						bullets.splice(i,1)
+					}
 				}
 				ui.update()
 			} else {
