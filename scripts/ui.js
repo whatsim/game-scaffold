@@ -32,10 +32,11 @@ function UI(player){
 		drawContext.fillStyle = "#9EB9D4"
 		drawContext.fillRect(-25,-2,50,4)
 		drawContext.fillStyle = "white"
-		drawContext.fillRect(-25,-2,player.health/2,4)
 		drawContext.textAlign = "center"
 		drawContext.font = "6pt Courier"
 		drawContext.fillText(player.inventory.ammo,0,-8)
+		if(player.health < 33) drawContext.fillStyle = "#DB7093"
+		drawContext.fillRect(-25,-2,player.health/2,4)
 
 		drawContext.restore()
 	}

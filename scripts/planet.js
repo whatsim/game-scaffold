@@ -7,7 +7,6 @@ function Planet(bullets,player,options){
 	this.mass = options.mass
 	this.color = options.color
 	
-	
 	this.update = function(){
 		
 		for(var i = 0; i < bullets.length; i++){
@@ -24,16 +23,18 @@ function Planet(bullets,player,options){
 		drawContext.save()
 		drawContext.translate(this.x,this.y)
 		drawContext.fillStyle = this.color
+		drawContext.strokeStyle = this.color
 		drawContext.beginPath()
 		drawContext.ellipse(0,0,this.radius,this.radius,0,2*Math.PI,false)
-		drawContext.fill()
+		if(this.mass > 0) drawContext.fill()
+		else drawContext.stroke()
 		drawContext.closePath()
 		drawContext.restore()
 	}
 
 	var pull = (object) => {
 		var distance = Utils.distance(this,object)
-		var force = this.mass/distance
+		var force = this.mass/(distance*distance)
 		var angle = Math.atan2(this.x - object.x,this.y - object.y)
 		object.velocity.x += force*Math.sin(angle)
 		object.velocity.y += force*Math.cos(angle)

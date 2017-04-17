@@ -6,6 +6,8 @@
 		color:"#6495ED"
 	})
 	
+	console.log(player)
+
 	var ui = new UI(player)
 	
 	var bullets = []
@@ -27,17 +29,21 @@
 		duration:1/120 * 10
 	}
 
+	var mode = "running"
+
 	var gameOptions = {
 		rendererID: 'renderer',
 		init : function(){
 
 			var connection = new Connect()
 
+			console.log(connection)
+
 			planets.push(new Planet(bullets,player,{
 				x:window.innerWidth/3,
 				y:window.innerHeight/2,
 				radius:60,
-				mass:100,
+				mass:12000,
 				color:'#DB7093'
 			}))		
 
@@ -45,7 +51,7 @@
 				x:window.innerWidth/2,
 				y:window.innerHeight/2,
 				radius:10,
-				mass:-25,
+				mass:-1000,
 				color:'skyblue'
 			}))		
 
@@ -53,25 +59,31 @@
 				x:2*window.innerWidth/3,
 				y:window.innerHeight/2,
 				radius:60,
-				mass:100,
+				mass:12000,
 				color:'#DB7093'
 			}))		
 		}, 
 		update : function(){
-			player.update(bullets)
-			for(var i = 0; i < planets.length; i++) planets[i].update()
-			for(var i = bullets.length-1; i >= 0; i--){
-				var age = bullets[i].update()
-				// audio stuff probably shouldn't be triggered here
-				if(age < 1) audioOut.beep(highBeep)
-				if(age > 500){
-					if(age > 10000){
-						audioOut.beep(lowBeep)
+
+			if(mode === 'running'){
+				Inputs.pollControllers()
+
+				player.update(bullets)
+				for(var i = 0; i < planets.length; i++) planets[i].update()
+				for(var i = bullets.length-1; i >= 0; i--){
+					var age = bullets[i].update()
+					if(age < 1) audioOut.beep(highBeep)
+					if(age > 500){
+						if(age > 10000){
+							audioOut.beep(lowBeep)
+						}
+						bullets.splice(i,1)
 					}
-					bullets.splice(i,1)
 				}
+				ui.update()
+			} else {
+
 			}
-			ui.update()
 		},
 		draw : function(time,context){
 			for(var i = 0; i < planets.length; i++) planets[i].draw(time,context)

@@ -8,6 +8,11 @@ var Inputs = (function(){
 	window.addEventListener('mousemove',readMouse)
 	window.addEventListener('mouseup',readMouse)
 
+	inputState.pollControllers = function(){
+		var gamepads = navigator.getGamepads()
+		inputState.controllers = gamepads
+	}
+
 	function readKeys(e){
 		e.preventDefault()
 		inputState[e.key] = e.type === 'keydown'
