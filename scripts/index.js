@@ -1,24 +1,29 @@
 (function(){
 	
-	var player, ui
+	var scene, player, ui
 	
 	var gameOptions = {
 		rendererID: 'renderer',
 		init : function(){
+
+			scene = new Scene()
+
 	 		player = new Player({
 				id:0,
 				x:100, y:100
 			})
+
+	 		ui = new UI(player)
+
+			scene.children.push(player)
+			scene.children.push(ui)
 			
-			ui = new UI(player)
 		}, 
 		update : function(){
-			player.update()
-			ui.update()
+			scene.update()
 		},
 		draw : function(time,context){
-			player.draw(time,context)
-			ui.draw(time,context)
+			scene.draw(time,context)
 		}
 	}
 
